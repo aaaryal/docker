@@ -9,7 +9,8 @@ stage ('Build') {
 stage('building an image') {
 steps {
 script {
-sh 'echo "COPY workspace/test/target/my-app-1.0-SNAPSHOT.jar /opt">> Dockerfile'
+sh 'echo "WORKDIR /var/lib/jenkins/workspace/test/target" >> Dockerfile'
+sh 'echo "COPY my-app-1.0-SNAPSHOT.jar /opt">> Dockerfile'
 def testimage = docker.build("my-image:${env.BUILD_ID}")
 }
 }
